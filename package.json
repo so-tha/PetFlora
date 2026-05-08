@@ -1,0 +1,20 @@
+{
+  "name": "petflora",
+  "version": "1.0.0",
+  "description": "PetFlora - API de Plantas Tóxicas e Seguras para Gatos",
+  "private": true,
+  "scripts": {
+    "setup": "cd backend && npm install && npm run parse && cd ../frontend && npm install",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npm run dev",
+    "start": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "cd backend && npm install",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "parse": "cd backend && npm run parse"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
