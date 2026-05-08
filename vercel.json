@@ -1,7 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "public": "frontend/dist",
+  "buildCommand": "cd backend && npm run parse && cd ../frontend && npm run build",
   "rewrites": [
     {
       "source": "/api/(.*)",
