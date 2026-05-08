@@ -22,8 +22,9 @@ export default function NonToxicPlants() {
     try {
       setLoading(true);
       const response = await plantsAPI.getNonToxic();
-      setPlants(response.data.plants);
-      setOriginalPlants(response.data.plants);
+      const plantsData = response.data?.plants || response.data || [];
+      setPlants(Array.isArray(plantsData) ? plantsData : []);
+      setOriginalPlants(Array.isArray(plantsData) ? plantsData : []);
       setCurrentPage(1);
       setError(null);
     } catch (err) {
@@ -59,7 +60,8 @@ export default function NonToxicPlants() {
 
     try {
       const response = await plantsAPI.search(query);
-      const nonToxicOnly = response.data.plants.filter(p => !p.toxic);
+      const plantsData = response.data?.plants || response.data || [];
+      const nonToxicOnly = (Array.isArray(plantsData) ? plantsData : []).filter(p => !p.toxic);
       const filtered = applyFilters(nonToxicOnly, filters.light, filters.size);
       setPlants(filtered);
     } catch (err) {

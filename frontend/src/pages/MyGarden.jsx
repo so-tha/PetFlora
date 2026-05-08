@@ -15,8 +15,8 @@ export default function MyGarden() {
   }, []);
 
   const loadGardenPlants = () => {
-    const saved = getSavedPlants();
-    setPlants(saved);
+    const saved = getSavedPlants() || [];
+    setPlants(Array.isArray(saved) ? saved : []);
     setCurrentPage(1);
   };
 

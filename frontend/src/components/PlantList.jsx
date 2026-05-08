@@ -19,12 +19,12 @@ export default function PlantList({
     return <div className="error">❌ Erro: {error}</div>;
   }
 
-  if (!plants || plants.length === 0) {
+  if (!plants || !Array.isArray(plants) || plants.length === 0) {
     return <div className="empty">📭 No plants found</div>;
   }
 
   // Calcular paginação
-  const totalPages = Math.ceil(plants.length / itemsPerPage);
+  const totalPages = Math.ceil((plants?.length || 0) / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedPlants = plants.slice(startIndex, endIndex);
