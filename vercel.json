@@ -1,14 +1,27 @@
 {
   "version": 2,
-  "buildCommand": "cd backend && npm run parse && cd ../frontend && npm run build",
-  "rewrites": [
+  "buildCommand": "npm run build",
+  "functions": {
+    "backend/src/server.js": {
+      "memory": 1024,
+      "maxDuration": 30,
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/backend/src/server.js"
+      "src": "/api/(.*)",
+      "dest": "/backend/src/server.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
     },
     {
-      "source": "/(.*)",
-      "destination": "/frontend/dist/index.html"
+      "src": "/(.*)",
+      "dest": "/frontend/dist/$1"
+    },
+    {
+      "src": "/(.+)",
+      "dest": "/frontend/dist/index.html",
+      "status": 200
     }
   ]
 }
