@@ -13,26 +13,32 @@ class PlantsController {
     }
   }
 
-  static async getToxicPlants(req, res) {
+  static async getNonToxicPlants(req, res) {
     try {
-      const plants = PlantsService.getToxicPlants();
+      console.log('🔵 GET /plants/non-toxic called');
+      const plants = PlantsService.getNonToxicPlants();
+      console.log(`📊 Returning ${plants.length} non-toxic plants`);
       res.json({
         total: plants.length,
         plants
       });
     } catch (error) {
+      console.error('❌ Error in getNonToxicPlants:', error);
       res.status(500).json({ error: error.message });
     }
   }
 
-  static async getNonToxicPlants(req, res) {
+  static async getToxicPlants(req, res) {
     try {
-      const plants = PlantsService.getNonToxicPlants();
+      console.log('🔴 GET /plants/toxic called');
+      const plants = PlantsService.getToxicPlants();
+      console.log(`📊 Returning ${plants.length} toxic plants`);
       res.json({
         total: plants.length,
         plants
       });
     } catch (error) {
+      console.error('❌ Error in getToxicPlants:', error);
       res.status(500).json({ error: error.message });
     }
   }

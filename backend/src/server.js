@@ -10,6 +10,12 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Log de requisições
+app.use((req, res, next) => {
+  console.log(`📍 ${req.method} ${req.path}`);
+  next();
+});
+
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
@@ -17,6 +23,11 @@ app.get('/health', (req, res) => {
 
 // Rotas
 app.use('/plants', plantsRoutes);
+
+// Inicializa dados (warm-up)
+const PlantsService = require('./services/plantsService');
+console.log('🔄 Loading plants data...');
+PlantsService.loadPlants();
 
 // 404
 app.use((req, res) => {

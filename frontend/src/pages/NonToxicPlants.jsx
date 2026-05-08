@@ -21,15 +21,24 @@ export default function NonToxicPlants() {
   const loadNonToxicPlants = async () => {
     try {
       setLoading(true);
+      console.log('📡 Fetching non-toxic plants...');
       const response = await plantsAPI.getNonToxic();
+      console.log('✅ Response:', response.data);
       const plantsData = response.data?.plants || response.data || [];
+      console.log('📊 Plants data:', plantsData);
       setPlants(Array.isArray(plantsData) ? plantsData : []);
       setOriginalPlants(Array.isArray(plantsData) ? plantsData : []);
       setCurrentPage(1);
       setError(null);
     } catch (err) {
       setError(err.message);
-      console.error(err);
+      console.error('❌ Error fetching plants:', err);
+      console.error('Full error:', {
+        message: err.message,
+        status: err.response?.status,
+        data: err.response?.data,
+        config: err.config
+      });
     } finally {
       setLoading(false);
     }
