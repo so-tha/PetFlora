@@ -5,6 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "parse": "node src/data/parse.js",
+    "build": "npm run parse",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js"
   },

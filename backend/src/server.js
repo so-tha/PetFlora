@@ -16,7 +16,7 @@ app.get('/health', (req, res) => {
 });
 
 // Rotas
-app.use('/api/plants', plantsRoutes);
+app.use('/plants', plantsRoutes);
 
 // 404
 app.use((req, res) => {
