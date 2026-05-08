@@ -1,15 +1,15 @@
 {
+  "version": 2,
   "buildCommand": "npm run build",
-  "experimentalServices": {
-    "frontend": {
-      "entrypoint": "frontend",
-      "routePrefix": "/",
-      "framework": "vite"
+  "public": "frontend/dist",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/backend/src/server.js"
     },
-    "backend": {
-      "entrypoint": "backend",
-      "routePrefix": "/api",
-      "framework": "express"
+    {
+      "source": "/(.*)",
+      "destination": "/frontend/dist/index.html"
     }
-  }
+  ]
 }

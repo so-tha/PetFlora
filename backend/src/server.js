@@ -16,6 +16,15 @@ app.use((req, res, next) => {
   next();
 });
 
+// Middleware para remover /api do path (para Vercel routing)
+app.use((req, res, next) => {
+  if (req.path.startsWith('/api/')) {
+    req.url = req.url.replace('/api', '');
+    console.log(`🔄 Rewritten URL to: ${req.url}`);
+  }
+  next();
+});
+
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
