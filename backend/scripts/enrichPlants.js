@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const fetch = require('node-fetch');
 
 const PLANTS_JSON = path.join(__dirname, '../src/data/plants.json');
 const DELAY_MS = 300;
