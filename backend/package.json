@@ -5,6 +5,8 @@
   "main": "src/server.js",
   "scripts": {
     "parse": "node src/data/parse.js",
+    "enrich": "node scripts/enrichPlants.js",
+    "setup": "npm run parse && npm run enrich",
     "build": "npm run parse",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js"
