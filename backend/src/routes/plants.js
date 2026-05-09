@@ -3,7 +3,6 @@ const PlantsController = require('../controllers/plantsController');
 
 const router = express.Router();
 
-// Rotas
 router.get('/', PlantsController.getAllPlants);
 router.get('/stats', PlantsController.getStats);
 router.get('/toxic', PlantsController.getToxicPlants);

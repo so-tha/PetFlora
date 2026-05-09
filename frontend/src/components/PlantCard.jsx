@@ -9,7 +9,6 @@ export default function PlantCard({ plant }) {
   const { addPlant, isInGarden: checkIsInGarden } = useMyGarden();
 
   useEffect(() => {
-    // Verifica se planta já está no garden
     setIsInGarden(checkIsInGarden(plant.id));
   }, [plant.id, checkIsInGarden]);
 

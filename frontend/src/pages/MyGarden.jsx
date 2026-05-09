@@ -26,7 +26,7 @@ export default function MyGarden() {
   };
 
   const handleClearGarden = () => {
-    if (window.confirm('Tem certeza? Isto removerá todas as plantas do seu jardim.')) {
+    if (window.confirm('Are you sure you want to clear your garden? This action cannot be undone.')) {
       clearGarden();
       loadGardenPlants();
     }

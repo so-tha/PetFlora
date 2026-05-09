@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: petflora
+    env: node
+    buildCommand: npm install && npm run setup
+    startCommand: npm start

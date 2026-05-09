@@ -1,5 +1,15 @@
 {
-  "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "frontend/dist"
+  "experimentalServices": {
+    "frontend": {
+      "entrypoint": "frontend",
+      "routePrefix": "/",
+      "framework": "vite"
+    },
+    "backend": {
+      "entrypoint": "backend",
+      "routePrefix": "/api",
+      "framework": "express"
+    }
+  }
 }
