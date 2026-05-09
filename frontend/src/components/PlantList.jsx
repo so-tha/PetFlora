@@ -12,7 +12,7 @@ export default function PlantList({
   onPageChange
 }) {
   if (loading) {
-    return <div className="loading">⏳ Carregando plantas...</div>;
+    return <div className="loading">⏳ Loading plants...</div>;
   }
 
   if (error) {
