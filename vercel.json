@@ -18,11 +18,12 @@
       "dest": "/api/index.js"
     },
     {
+      "src": "/(.*\\.[a-zA-Z0-9]+|[?])$",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }

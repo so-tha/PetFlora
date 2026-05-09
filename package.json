@@ -12,6 +12,7 @@
     "build": "npm run build:backend && npm run build:frontend",
     "build:backend": "cd backend && npm install && npm run parse",
     "build:frontend": "cd frontend && npm install && npm run build",
+    "preview": "npm run build && cd frontend && npm run preview",
     "parse": "cd backend && npm run parse"
   },
   "devDependencies": {
