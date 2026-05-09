@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NODE_ENV === 'production' 
-  ? window.location.origin + '/api/plants' 
-  : '/api/plants';
+const API_URL = process.env.VITE_API_URL || 'http://localhost:5000/api/plants';
 
 const api = axios.create({
   baseURL: API_URL,
