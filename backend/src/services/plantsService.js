@@ -79,6 +79,28 @@ class PlantsService {
     const plants = this.getAllPlants();
     return plants.filter(p => p.family?.toLowerCase().includes(family.toLowerCase()));
   }
+
+  static updatePlantImage(id, { imageUrl, imageSource, imageSourceUrl }) {
+    const data = this.loadPlants();
+    const plants = data.plants || [];
+    const plant = plants.find(p => p.id === id);
+    
+    if (plant) {
+      plant.imageUrl = imageUrl;
+      if (imageSource) plant.imageSource = imageSource;
+      if (imageSourceUrl) plant.imageSourceUrl = imageSourceUrl;
+      
+      try {
+        const filePath = path.join(__dirname, '../data/plants.json');
+        fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+        return true;
+      } catch (error) {
+        console.error('❌ Erro ao salvar imagem no JSON:', error.message);
+        return false;
+      }
+    }
+    return false;
+  }
 }
 
 // Carregar dados ao iniciar

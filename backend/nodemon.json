@@ -1,0 +1,6 @@
+{
+  "ignore": [
+    "src/data/plants.json",
+    "scripts/.image-fetch-progress.json"
+  ]
+}

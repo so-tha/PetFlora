@@ -102,6 +102,27 @@ class PlantsController {
       res.status(500).json({ error: error.message });
     }
   }
+
+  static async updatePlantImage(req, res) {
+    try {
+      const { id } = req.params;
+      const { imageUrl, imageSource, imageSourceUrl } = req.body;
+      
+      const success = PlantsService.updatePlantImage(parseInt(id), {
+        imageUrl,
+        imageSource,
+        imageSourceUrl
+      });
+      
+      if (!success) {
+        return res.status(404).json({ error: 'Planta não encontrada' });
+      }
+      
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }
 
 module.exports = PlantsController;

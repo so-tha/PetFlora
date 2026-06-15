@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useMyGarden } from '../hooks/useMyGarden';
+import { useToast } from '../components/Toast';
+import ConfirmModal from '../components/ConfirmModal';
 import PlantList from '../components/PlantList';
 import '../styles/PlantsPage.css';
 import '../styles/MyGarden.css';
@@ -9,6 +11,8 @@ export default function MyGarden() {
   const [plants, setPlants] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { showToast } = useToast();
 
   useEffect(() => {
     loadGardenPlants();
@@ -21,15 +25,23 @@ export default function MyGarden() {
   };
 
   const handleRemovePlant = (plantId) => {
+    const plantToRemove = plants.find(p => p.id === plantId);
     removePlant(plantId);
     loadGardenPlants();
+    if (plantToRemove) {
+      showToast(`"${plantToRemove.commonNames?.[0] || plantToRemove.scientificName}" removed from your garden.`, 'info', 'Removed');
+    }
   };
 
   const handleClearGarden = () => {
-    if (window.confirm('Are you sure you want to clear your garden? This action cannot be undone.')) {
-      clearGarden();
-      loadGardenPlants();
-    }
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmClear = () => {
+    clearGarden();
+    loadGardenPlants();
+    setIsModalOpen(false);
+    showToast('All plants have been cleared from your garden.', 'warning', 'Garden Cleared');
   };
 
   return (
@@ -69,6 +81,16 @@ export default function MyGarden() {
           )}
         </div>
       </div>
+      <ConfirmModal
+        isOpen={isModalOpen}
+        title="Clear Garden?"
+        message="Are you sure you want to clear your garden? This action cannot be undone."
+        confirmText="Clear Garden"
+        cancelText="Cancel"
+        type="danger"
+        onConfirm={handleConfirmClear}
+        onCancel={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }

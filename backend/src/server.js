@@ -26,6 +26,23 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Bem-vindo à PetFlora API! 🌿',
+    version: '1.0.0',
+    endpoints: {
+      plants: '/api/plants',
+      toxic: '/api/plants/toxic',
+      nonToxic: '/api/plants/non-toxic',
+      stats: '/api/plants/stats',
+      search: '/api/plants/search?q={nome}',
+      filterByFamily: '/api/plants/family?family={familia}',
+      getById: '/api/plants/{id}',
+      health: '/health'
+    }
+  });
+});
+
 app.use('/plants', plantsRoutes);
 
 const PlantsService = require('./services/plantsService');
